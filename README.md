@@ -7,7 +7,7 @@
 pyinstaller --onefile --noconsole Main.py
 ```
 4- githubumda bulunan base-expressjs-photogallery reposunu da forklayın. adı photogallery ama bu proje aslında bir trojanın server'ı. :))<br/>
-5- mongo configini yapın.<br/>
+5- server bilgisayarının ipv4ünü methods.py'deki URL ile değiştirmeyi unutmayın.<br/>
 <br/>
 Buradan sonra aslında yapılması gereken ekstra bir ayar yok. Projeyi bilgisayarınıza kurmak istemezseniz , şu [linkten](https://www.youtube.com/watch?v=vt0Qbv2cGuE) tanıtım videoma bakabilirsiniz.
 
