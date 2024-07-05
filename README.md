@@ -1,3 +1,7 @@
+Tanitim videosu: https://youtu.be/vt0Qbv2cGuE?si=9nr00ow3kqhwwMXD
+<br>
+
+
 # Bu bir trojan projesidir. 
 1-projeyi bilgisayarınıza indirdikten sonra , herhangi bir terminali açın.
 <br/>
